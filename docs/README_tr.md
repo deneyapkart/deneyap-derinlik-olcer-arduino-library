@@ -6,7 +6,7 @@ Deneyap Derinlik Ölçer VL53L0X için Arduino kütüphanesidir.
 
 ## :mag_right:Özellikler 
 - `Ürün ID` **M06**, **mpv1.0**
-- `MCU` VL53L0X, STM8S003F3
+- `MCU` VL53L0X
 - `Ağırlık`
 - `Modul Boyutları` 
 - `I2C Adres` 0x29
@@ -21,7 +21,7 @@ Deneyap Derinlik Ölçer VL53L0X
 [VL53L0X](https://www.st.com/content/ccc/resource/technical/document/datasheet/group3/b2/1e/33/77/c6/92/47/6b/DM00279086/files/DM00279086.pdf/jcr:content/translations/en.DM00279086.pdf)
 
 
-[Arduino Kütüphanesi Nasıl İndirilir](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries)
+[Arduino IDE'de Kütüphane Nasıl İndirilir](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries)
 
 ## :pushpin:Deneyap Derinlik Ölçer VL53L0X
 Bu Arduino kütüphanesi Deneyap Derinlik Ölçer VL53L0X'nin I2C çevre birimi ile kullanılmasını sağlar. Arduino ile uyumlu, I2C çevre birimine sahip herhangi bir geliştirme kartı ile bu kütüphaneyi projelerinizde kullanabilirsiniz.
@@ -36,9 +36,11 @@ Bu Arduino kütüphanesi Deneyap Derinlik Ölçer VL53L0X'nin I2C çevre birimi 
 ## Sürüm Geçmişi
 1.0.0 - ilk sürüm
 
+1.0.1 - hata giderildi
+
 ## :rocket:Donanım Bağlantıları
 - Deneyap Derinlik Ölçer ile kullanılan geliştirme kartı I2C kablosu ile bağlanabilir
-- veya jumper kablolar ile ile 3V3, GND, SDA ve SCL bağlantıları yapılabilir. 
+- veya jumper kablolar ile 3V3, GND, SDA ve SCL bağlantıları yapılabilir. 
 
 | Derinlik Ölçer | Fonksiyon| Kart pinleri |
 | :---     | :---   |   :---  |

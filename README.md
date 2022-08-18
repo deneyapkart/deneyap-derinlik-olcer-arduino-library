@@ -7,7 +7,7 @@ Arduino library for Deneyap ToF Range Finder Sensor VL53L0X
 
 ## :mag_right:Specifications 
 - `Product ID` **M06**, **mpv1.0**
-- `MCU` VL53L0X, STM8S003F3
+- `MCU` VL53L0X
 - `Weight` 
 - `Module Dimension`
 - `I2C address` 0x29
@@ -24,7 +24,7 @@ Deneyap ToF Range Finder Sensor VL53L0X
 [How to install a Arduino Library](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries)
 
 ## :pushpin:Deneyap ToF Range Finder Sensor VL53L0X
-This Arduino library allows you to use DDeneyap ToF Range Finder Sensor VL53L0X with I2C peripheral. You can use this library in your projects with any Arduino compatible board with I2C peripheral.
+This Arduino library allows you to use Deneyap ToF Range Finder Sensor VL53L0X with I2C peripheral. You can use this library in your projects with any Arduino compatible board with I2C peripheral.
 
 ## :globe_with_meridians:Repository Contents
 - `/docs ` README_tr.md and product photos
@@ -35,6 +35,8 @@ This Arduino library allows you to use DDeneyap ToF Range Finder Sensor VL53L0X 
 
 ## Version History
 1.0.0 - initial release
+
+1.0.1 - bug fix
 
 ## :rocket:Hardware Connections
 - Deneyap ToF Range Finder Sensor VL53L0X and Board can be connected with I2C cable
