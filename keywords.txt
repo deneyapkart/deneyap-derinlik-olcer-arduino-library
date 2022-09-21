@@ -18,7 +18,6 @@ TofRangeFinder	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 begin	KEYWORD2
-init	KEYWORD2
 ReadDistance	KEYWORD2
 
 #######################################

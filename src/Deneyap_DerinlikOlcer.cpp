@@ -3,8 +3,8 @@
 @file         Deneyap_DerinlikOlcer.cpp
 @mainpage     Deneyap ToF Range Finder Sensor VL53L0X Arduino library source file
 @maintainer   RFtek Electronics <techsupport@rftek.com.tr>
-@version      v1.0.1
-@date         August 18, 2022
+@version      v1.0.2
+@date         September 21, 2022
 @brief        Includes functions to control Deneyap ToF Range Finder Sensor VL53L0X
               Arduino library
 
@@ -22,38 +22,36 @@ Library includes:
  * @param   adress: Device adress
  * @retval  None
  **/
-bool TofRangeFinder::begin(uint8_t i2c_addr) {
-  uint8_t x;
-  DevAddr = I2C_DevAddr;
+void TofRangeFinder::begin(uint8_t address, TwoWire &wirePort) {
+  _address = address;
   Wire.begin();
-  x = read8(TofRangeFinder_REG_IDENTIFICATION_MODEL_ID);
+  //uint8_t x = readRegister(IDENTIFICATION_MODEL_ID);
   //  Serial.print("Device ID: "); Serial.println(x,HEX);
   //  Serial.println("");
-  //  if(x != 0xEE)
-  //  {
+  //  if(x != 0xEE) {
   //    Serial.print("Read Chip ID fail!");
   //  }
 
-  write8(0x88, 0x00);
-  write8(0x80, 0x01);
-  write8(0xFF, 0x01);
-  write8(0x00, 0x00);
-  read8(0x91);
-  write8(0x91, 0x3c);
-  write8(0x00, 0x01);
-  write8(0xFF, 0x00);
-  write8(0x80, 0x00);
+  writeRegister(0x88, 0x00);
+  writeRegister(0x80, 0x01);
+  writeRegister(0xFF, 0x01);
+  writeRegister(0x00, 0x00);
+  readRegister(0x91);
+  writeRegister(0x91, 0x3c);
+  writeRegister(0x00, 0x01);
+  writeRegister(0xFF, 0x00);
+  writeRegister(0x80, 0x00);
 
-  write8(0x80, 0x01);
-  write8(0xFF, 0x01);
-  write8(0x00, 0x00);
-  write8(0x91, 0x3c);
-  write8(0x00, 0x01);
-  write8(0xFF, 0x00);
-  write8(0x80, 0x00);
+  writeRegister(0x80, 0x01);
+  writeRegister(0xFF, 0x01);
+  writeRegister(0x00, 0x00);
+  writeRegister(0x91, 0x3c);
+  writeRegister(0x00, 0x01);
+  writeRegister(0xFF, 0x00);
+  writeRegister(0x80, 0x00);
 
-  write8(TofRangeFinder_REG_SYSRANGE_START, TofRangeFinder_REG_SYSRANGE_MODE_BACKTOBACK);
-  return 1;
+  writeRegister(SYSRANGE_START, SYSRANGE_MODE_BACKTOBACK);
+  //return true;
 }
 
 /**
@@ -61,8 +59,8 @@ bool TofRangeFinder::begin(uint8_t i2c_addr) {
  * @param
  * @retval
  **/
-void TofRangeFinder::write8(unsigned char Reg, unsigned char byte) {
-  Wire.beginTransmission(DevAddr);
+void TofRangeFinder::writeRegister(unsigned char Reg, unsigned char byte) {
+  Wire.beginTransmission(_address);
   Wire.write(Reg);
   Wire.write((uint8_t)byte);
   Wire.endTransmission();
@@ -74,10 +72,10 @@ void TofRangeFinder::write8(unsigned char Reg, unsigned char byte) {
  * @retval
  **/
 void TofRangeFinder::readData(unsigned char Reg, unsigned char Num) {
-  Wire.beginTransmission(DevAddr);
+  Wire.beginTransmission(_address);
   Wire.write((uint8_t)Reg);
   Wire.endTransmission();
-  Wire.requestFrom((uint8_t)DevAddr, (uint8_t)Num);
+  Wire.requestFrom((uint8_t)_address, (uint8_t)Num);
 
   for (int i = 0; i < Num; i++) {
     Data[i] = Wire.read();
@@ -90,12 +88,12 @@ void TofRangeFinder::readData(unsigned char Reg, unsigned char Num) {
  * @param
  * @retval
  **/
-uint8_t TofRangeFinder::read8(unsigned char Reg) {
+uint8_t TofRangeFinder::readRegister(unsigned char Reg) {
 
-  Wire.beginTransmission(DevAddr);
+  Wire.beginTransmission(_address);
   Wire.write((uint8_t)Reg);
   Wire.endTransmission();
-  Wire.requestFrom((uint8_t)DevAddr, (uint8_t)1);
+  Wire.requestFrom((uint8_t)_address, (uint8_t)1);
 
   return Wire.read();
 }
@@ -106,10 +104,10 @@ uint8_t TofRangeFinder::read8(unsigned char Reg) {
  * @retval
  **/
 float TofRangeFinder::ReadDistance() {
-  readData(TofRangeFinder_REG_RESULT_RANGE_STATUS, 12);
+  readData(RESULT_RANGE_STATUS, 12);
   distance = ((Data[10] & 0xFF) << 8) |
              (Data[11] & 0xFF);
-  write8(TofRangeFinder_REG_SYSTEM_RANGE_CONFIG, 1);
+  writeRegister(SYSTEM_RANGE_CONFIG, 1);
   if (distance == 20)
     distance = _distance;
   else
